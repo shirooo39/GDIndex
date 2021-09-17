@@ -1,9 +1,11 @@
 .background.container {
     background-color: #283593;
-    /*background-image: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@luzeadev/assets/img/background.jpg);*/
+    /*****
+    background-image: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@luzeadev/assets/img/background.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    ******/
     padding: 1em;
 }
 
