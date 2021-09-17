@@ -20,7 +20,7 @@ self.props = {
     lite: true, // do not change this to false
 
     description: 'Google Drive Index', // change it to whatever you want
-    assets_url: 'https://cdn.jsdelivr.net/gh/luzeagithub/google-drive-index-worker@master/assets',
+    assets_url: 'https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@luzeadev/assets',
     discord_invite: '' // if you want to be fancy, type in your discord invitation code into this field.
 };
 //
