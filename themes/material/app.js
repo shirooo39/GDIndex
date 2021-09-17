@@ -600,7 +600,7 @@ function onSearchResultItemClick(a_ele) {
   var cur = window.current_drive_order;
   var dialog = mdui.dialog({
     title: '',
-    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在获取目标路径...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">Loading path...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     // content: '<div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     history: false,
     modal: true,
@@ -621,28 +621,28 @@ function onSearchResultItemClick(a_ele) {
         closeOnEsc: true,
         buttons: [
           {
-            text: '打开', onClick: function () {
+            text: 'Open', onClick: function () {
               window.location.href = href
             }
           }, {
-            text: '新标签中打开', onClick: function () {
+            text: 'Open in a new tab', onClick: function () {
               window.open(href)
             }
           }
-          , {text: '取消'}
+          , {text: 'Cancel'}
         ]
       });
       return;
     }
     dialog.close();
     dialog = mdui.dialog({
-      title: '<i class="mdui-icon material-icons">&#xe811;</i>获取目标路径失败',
-      content: 'o(╯□╰)o 可能是因为该盘中并不存在此项！也可能因为没有把【与我共享】的文件添加到个人云端硬盘中！',
+      title: '<i class="mdui-icon material-icons">&#xe811;</i>Unable to the path!',
+      content: 'o(╯□╰)o Unable to locate the file or folder! Might not exist on the drive!',
       history: false,
       modal: true,
       closeOnEsc: true,
       buttons: [
-        {text: 'WTF ???'}
+        {text: 'OK'}
       ]
     });
   })
