@@ -2,7 +2,7 @@ function toggleDarkmode() {
     if (getCookie('darkmode') == 'false') {
         darkmodeStylesheet = document.createElement('link');
         darkmodeStylesheet['rel'] = 'stylesheet';
-        darkmodeStylesheet['href'] = 'https://cdn.jsdelivr.net/gh/luzeagithub/google-drive-index-worker@master/assets/css/darkmode.css';
+        darkmodeStylesheet['href'] = 'https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@luzeadev/assets/css/darkmode.css';
         document.head.appendChild(darkmodeStylesheet);
         setCookie('darkmode', 'true');
     } else if (getCookie('darkmode') == "true") {
@@ -33,6 +33,6 @@ if (getCookie('darkmode') == '') {
 } else if (getCookie('darkmode') == 'true') {
     var darkmodeStylesheet = document.createElement('link');
     darkmodeStylesheet['rel'] = 'stylesheet';
-    darkmodeStylesheet['href'] = 'https://cdn.jsdelivr.net/gh/luzeagithub/google-drive-index-worker@master/assets/css/darkmode.css';
+    darkmodeStylesheet['href'] = 'https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@luzeadev/assets/css/darkmode.css';
     document.head.appendChild(darkmodeStylesheet);
 }
