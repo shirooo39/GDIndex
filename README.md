@@ -1,20 +1,21 @@
 # GDIndex
+Forked version of [mapple3142/GDIndex](https://github.com/maple3142/GDIndex)
 
 ![preview](https://i.imgur.com/ENkZwCU.png)
 
 [繁體中文](README.zhtw.md)
 [简体中文](README.zh.md)
 
-> GDIndex is similar to [GOIndex](https://github.com/donwa/goindex).
-> It allows you to deploy a "Google Drive Index" on CloudFlare Workers along with many extra features
+> GDIndex is a similar project to [GOIndex](https://github.com/donwa/goindex).
+> It allows you to deploy a "Google Drive Index" on Cloudflare's Workers along with many extra features.
 >
-> By the way, instead of modify from GOIndex, this is a total rewrite
+> Instead of modifying GOIndex, GDIndex is a complete rewrite from scratch.
 
 [Demo](https://gdindex-demo.maple3142.workers.dev/)
 
-## Difference between GOIndex and GDIndex
+## The differences between GOIndex and GDIndex
 
--   Frontend is based on Vue.js
+-   Front-end is based on Vue.js
 -   Image viewer doesn't require opening new page
 -   Video player support subtitles(Currently only srt is supported)
 -   Online PDF, EPUB reader
@@ -22,14 +23,12 @@
 -   Support Http Basic Auth
 -   Support multiple drives(personal, team) without changing server's code
 
-## Usage
+## How to Use
 
-### Simple and automatic way
+### Simple
+Go [https://gdindex-code-builder.maple3142.net/](https://gdindex-code-builder.maple3142.net/), and follow the instructions there.
 
-Go [https://gdindex-code-builder.maple3142.net/](https://gdindex-code-builder.maple3142.net/), and follow its instructions.
-
-### Manual way
-
+### Manual
 1. Install [rclone](https://rclone.org/)
 2. Setup your Google Drive: https://rclone.org/drive/
 3. Run `rclone config file` to find your `rclone.conf` location
