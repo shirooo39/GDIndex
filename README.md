@@ -1,4 +1,8 @@
 <!-- # GoIndex-theme-nexmoe -->
+# [Theme] GoIndex - nexmoe
+Forked version of [5MayRain/goIndex-theme-nexmoe](https://github.com/5MayRain/goIndex-theme-nexmoe).
+
+<hr>
 
 主题基于 [yanzai/goindex](https://github.com/yanzai/goindex)
 
