@@ -75,24 +75,24 @@ const authConfig = {
     {
       id: "root_id_1", // Fill this with a drive id (personal or team drive) or a folder id.
       name: "Name 1",
-      user: "",
-      pass: "",
-      protect_file_link: false // Set this to "true" to enable the Basic HTTP Authentication.
+      user: "", // Fill this to enable the authentication to access the site.
+      pass: "", // Fill this to enable the authentication to access the site.
+      protect_file_link: false // Set this to "true" to enable authentication for each urls.
     }
     /**************************************************
     {
       id: "root_id_2", // Fill this with a drive id (personal or team drive) or a folder id.
       name: "Name 2",
-      user: "",
-      pass: "",
-      protect_file_link: false // Set this to "true" to enable the Basic HTTP Authentication.
+      user: "", // Fill this to enable the authentication to access the site.
+      pass: "", // Fill this to enable the authentication to access the site.
+      protect_file_link: false // Set this to "true" to enable authentication for each urls.
     },
     {
       id: "root_id_3", // Fill this with a drive id (personal or team drive) or a folder id.
       name: "Name 3",
-      user: "",
-      pass: "",
-      protect_file_link: false // Set this to "true" to enable the Basic HTTP Authentication.
+      user: "", // Fill this to enable the authentication to access the site.
+      pass: "", // Fill this to enable the authentication to access the site.
+      protect_file_link: false // Set this to "true" to enable authentication for each urls.
     }
     **************************************************/
   ],
