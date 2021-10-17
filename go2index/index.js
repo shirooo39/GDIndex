@@ -1,91 +1,118 @@
-// =======Options START=======
+//------------------------------ Service Accounts COnfiguration ------------------------------//
+// Added support for multiple service accounts.
+// Random service account will be selected by each time the site is visited.
+//
+const serviceaccounts = [
+  // Your service account(s) goes here.
+  // Multiple service accounts are also supported.
+  //
+  /*****
+  {
+    "type": "service_account",
+    "project_id": "BLANK",
+    "private_key_id": "BLANK",
+    "private_key": "BLANK",
+    "client_email": "BLANK",
+    "client_id": "BLANK",
+    "auth_uri": "BLANK",
+    "token_uri": "BLANK",
+    "auth_provider_x509_cert_url": "BLANK",
+    "client_x509_cert_url": "BLANK"
+  }
+  *****/
+];
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // Do NOT modify this!
+//------------------------------ END ------------------------------//
+
+//------------------------------ Main Configurations ------------------------------//
 var authConfig = {
-  siteName: "GoIndex-theme-acrou", // 网站名称
-  version: "1.1.2", // 程序版本
+  siteName: "Shiro39", // Site name
+  version: "1.1.2", // Script version
   theme: "acrou",
-  // 强烈推荐使用自己的 client_id 和 client_secret
+
+  // It's highly recommended to use your OWN client_id, instead of using rclone's client_id.
   client_id: "202264815644.apps.googleusercontent.com",
   client_secret: "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
-  refresh_token: "", // 授权 token
+  refresh_token: "", // rclone refresh token
+
+  // Enable or disable service accounts
+  "service_account": true, // Set this to "true" if you want to use Service Account.
+	"service_account_json": randomserviceaccount, // Do NOT modify this one!
+	// Make sure you already have your SAs added into the target drive first! (be it as a Google Group or one-by-one)
+	// If you enable the service_account, you can leave the refresh_token blank.
+  
   /**
-   * 设置要显示的多个云端硬盘；按格式添加多个
-   * [id]: 可以是 团队盘id、子文件夹id、或者"root"（代表个人盘根目录）；
-   * [name]: 显示的名称
-   * [user]: Basic Auth 的用户名
-   * [pass]: Basic Auth 的密码
-   * [protect_file_link]: Basic Auth 是否用于保护文件链接，默认值（不设置时）为 false，即不保护文件链接（方便 直链下载/外部播放 等）
-   * 每个盘的 Basic Auth 都可以单独设置。Basic Auth 默认保护该盘下所有文件夹/子文件夹路径
-   * 【注意】默认不保护文件链接，这样可以方便 直链下载/外部播放;
-   *       如果要保护文件链接，需要将 protect_file_link 设置为 true，此时如果要进行外部播放等操作，需要将 host 替换为 user:pass@host 的 形式
-   * 不需要 Basic Auth 的盘，保持 user 和 pass 同时为空即可。（直接不设置也可以）
-   * 【注意】对于id设置为为子文件夹id的盘将不支持搜索功能（不影响其他盘）。
+   * Set multiple cloud drives to be displayed; add multiple by format
+   * [id]: can be team drive id, subfolder id, or "root" (for personal drive root).
+   * [name]: Name to be displayed
+   * [user]: username of Basic Auth
+   * [pass]: password for Basic Auth
+   * [protect_file_link]: whether Basic Auth is used to protect file links, default value (when not set) is false, i.e. no file links are protected (for direct link download/external playback, etc.)
+   * Basic Auth protects all folders/subfolder paths under the disk by default.
+   * [Note] File links are not protected by default, so that it is convenient for direct link downloading/external playback;
+   * If you want to protect file link, you need to set protect_file_link to true, then you need to replace the host with user:pass@host if you want to do external playback.
+   * If you don't need Basic Auth, just keep user and pass empty at the same time. (Directly without setting can also be)
+   * [Note] The search function will not be supported for the disk whose id is set to subfolder id (does not affect other disks).
    */
   roots: [
     {
-      id: "",
-      name: "TeamDrive",
-      pass: "",
-    },
-    {
       id: "root",
-      name: "PrivateDrive",
+      name: "Drive",
       user: "",
       pass: "",
-      protect_file_link: true,
-    },
-    {
-      id: "",
-      name: "folder1",
-      pass: "",
-    },
+      protect_file_link: false
+    }
+    // {
+    //   id: "",
+    //   name: "",
+    //   user: "",
+    //   pass: "",
+    //   protect_file_link: false
+    // },
+    // {
+    //   id: "",
+    //   name: "",
+    //   user: "",
+    //   pass: "",
+    //   protect_file_link: false
+    // }
   ],
   default_gd: 0,
   /**
-   * 文件列表页面每页显示的数量。【推荐设置值为 100 到 1000 之间】；
-   * 如果设置大于1000，会导致请求 drive api 时出错；
-   * 如果设置的值过小，会导致文件列表页面滚动条增量加载（分页加载）失效；
-   * 此值的另一个作用是，如果目录内文件数大于此设置值（即需要多页展示的），将会对首次列目录结果进行缓存。
+   * The number of pages to be displayed on each page of the file list page. Recommended value is between 100 and 1000].
+   * If the value set is greater than 1000, it will cause an error when requesting the drive api.
+   * If the value is set too small, it will cause the file list page scrollbar incremental loading (paging loading) to fail.
+   * Another function of this value is that if the number of files in the directory is larger than this setting (i.e., if multiple pages need to be displayed), the first listing of directory results will be cached.
    */
   files_list_page_size: 50,
+  
   /**
-   * 搜索结果页面每页显示的数量。【推荐设置值为 50 到 1000 之间】；
-   * 如果设置大于1000，会导致请求 drive api 时出错；
-   * 如果设置的值过小，会导致搜索结果页面滚动条增量加载（分页加载）失效；
-   * 此值的大小影响搜索操作的响应速度。
+   * The number of search results pages to be displayed per page. Recommended value is between 50 and 1000].
+   * If the value set is greater than 1000, it will cause an error when requesting the drive api.
+   * If the value set is too small, it will cause the search result page scroll bar incremental loading (paging loading) to fail.
+   * The size of this value affects the response speed of the search operation.
    */
   search_result_list_page_size: 50,
-  // 确认有 cors 用途的可以开启
+
+  // Enable or disable cors
   enable_cors_file_down: false,
+  
   /**
-   * 上面的 basic auth 已经包含了盘内全局保护的功能。所以默认不再去认证 .password 文件内的密码;
-   * 如果在全局认证的基础上，仍需要给某些目录单独进行 .password 文件内的密码验证的话，将此选项设置为 true;
-   * 【注意】如果开启了 .password 文件密码验证，每次列目录都会额外增加查询目录内 .password 文件是否存在的开销。
+   * The basic auth above already includes the global protection in the disk. So by default, the password in the .password file will not be authenticated;
+   * If you still need to authenticate passwords in .password files for some directories on top of global authentication, set this option to true;
+   * Note: If .password file password authentication is enabled, each time a directory is listed, there will be additional overhead for querying whether the .password file exists in the directory.
    */
   enable_password_file_verify: false,
 };
 
 var themeOptions = {
-  cdn: "https://cdn.jsdelivr.net/gh/Aicirou/goindex-theme-acrou",
-  // 主题版本号
-  version: "2.0.8",
-  //可选默认系统语言:en/zh-chs/zh-cht
-  languages: "en",
+  cdn: "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@achrou", // Base url
+  version: "2.0.8", // This entry is meaningless in my moddified version
+  languages: "en", // Set the default language: en/zh-chs/zh-cht
   render: {
-    /**
-     * 是否渲染HEAD.md文件
-     * Render HEAD.md file
-     */
-    head_md: false,
-    /**
-     * 是否渲染README.md文件
-     * Render README.md file
-     */
-    readme_md: false,
-    /**
-     * 是否渲染文件/文件夹描述
-     * Render file/folder description or not
-     */
-    desc: false,
+    head_md: false, // Render HEAD.md or not
+    readme_md: false, // Render README.md or not
+    desc: false, // Render file/folder description or not
   },
   /**
    * 视频播放器选项
@@ -105,7 +132,7 @@ var themeOptions = {
    */
   audio: {},
 };
-// =======Options END=======
+//------------------------------ END ------------------------------//
 
 /**
  * global functions
@@ -152,7 +179,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
   <style>
-    @import url(${themeOptions.cdn}@${themeOptions.version}/dist/style.min.css);
+    @import url(${themeOptions.cdn}/dist/style.min.css);
   </style>
   <script>
     window.gdconfig = JSON.parse('${JSON.stringify({
@@ -169,13 +196,72 @@ function html(current_drive_order = 0, model = {}) {
 </head>
 <body>
     <div id="app"></div>
-    <script src="${themeOptions.cdn}@${
-    themeOptions.version
-  }/dist/app.min.js"></script>
+    <script src="${themeOptions.cdn}/dist/app.min.js"></script>
 </body>
 </html>
 `;
 }
+
+const JSONWebToken = {
+  header: {
+    alg: 'RS256',
+    typ: 'JWT'
+  },
+  importKey: async function(pemKey) {
+    var pemDER = this.textUtils.base64ToArrayBuffer(pemKey.split('\n').map(s => s.trim()).filter(l => l.length && !l.startsWith('---')).join(''));
+    return crypto.subtle.importKey('pkcs8', pemDER, {
+      name: 'RSASSA-PKCS1-v1_5',
+      hash: 'SHA-256'
+    }, false, ['sign']);
+  },
+  createSignature: async function(text, key) {
+    const textBuffer = this.textUtils.stringToArrayBuffer(text);
+    return crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, textBuffer)
+  },
+  generateGCPToken: async function(serviceAccount) {
+    const iat = parseInt(Date.now() / 1000);
+    var payload = {
+      "iss": serviceAccount.client_email,
+      "scope": "https://www.googleapis.com/auth/drive",
+      "aud": "https://oauth2.googleapis.com/token",
+      "exp": iat + 3600,
+      "iat": iat
+    };
+    const encPayload = btoa(JSON.stringify(payload));
+    const encHeader = btoa(JSON.stringify(this.header));
+    var key = await this.importKey(serviceAccount.private_key);
+    var signed = await this.createSignature(encHeader + "." + encPayload, key);
+    return encHeader + "." + encPayload + "." + this.textUtils.arrayBufferToBase64(signed).replace(/\//g, '_').replace(/\+/g, '-');
+  },
+  textUtils: {
+    base64ToArrayBuffer: function(base64) {
+      var binary_string = atob(base64);
+      var len = binary_string.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    stringToArrayBuffer: function(str) {
+      var len = str.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = str.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    arrayBufferToBase64: function(buffer) {
+      let binary = '';
+      let bytes = new Uint8Array(buffer);
+      let len = bytes.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+    }
+  }
+};
 
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request));
@@ -892,14 +978,23 @@ class googleDrive {
     console.log("fetchAccessToken");
     const url = "https://www.googleapis.com/oauth2/v4/token";
     const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
+      'Content-Type': 'application/x-www-form-urlencoded'
     };
-    const post_data = {
-      client_id: this.authConfig.client_id,
-      client_secret: this.authConfig.client_secret,
-      refresh_token: this.authConfig.refresh_token,
-      grant_type: "refresh_token",
-    };
+    var post_data;
+    if (this.authConfig.service_account && typeof this.authConfig.service_account_json != "undefined") {
+      const jwttoken = await JSONWebToken.generateGCPToken(this.authConfig.service_account_json);
+      post_data = {
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwttoken,
+      };
+    } else {
+      post_data = {
+        client_id: this.authConfig.client_id,
+        client_secret: this.authConfig.client_secret,
+        refresh_token: this.authConfig.refresh_token,
+        grant_type: "refresh_token",
+      };
+    }
 
     let requestOption = {
       method: "POST",
