@@ -5487,30 +5487,30 @@ if (UI.dark_mode) {
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/mdui_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui_v2.min.css">'
+    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/mdui_v2.min.css">'
   );
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/nexmoe_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe_v2.min.css">'
+    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/nexmoe_v2.min.css">'
   );
 }
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/js/mdui.min.js"></script>'
+  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/mdui.min.js"></script>'
 );
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/js/flv.min.js"></script>'
+  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/flv.min.js"></script>'
 );
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/js/DPlayer.min.js"></script>'
+  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/DPlayer.min.js"></script>'
 );
 document.write(
   '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>'
@@ -5556,7 +5556,7 @@ function init() {
   if (UI.credits) {
     html += `
     <div style="margin-bottom: 20px" class="mdui-center mdui-text-center">
-      <a href="https://github.com/cheems/goindex-extended" target="_blank">
+      <a href="https://github.com/shirooo39/GDIndex/tree/shiromoe" target="_blank">
         <img src="https://img.shields.io/static/v1?label=cheems&amp;message=goindex-extended&amp;color=1E89F2&amp;labelColor=374455&amp;logo=github" alt="cheems - goindex-extended">
       </a>
     </div>
@@ -6184,8 +6184,8 @@ function file_code(path) {
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
-<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/js/ace.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/js/ext-language_tools.js"></script>
+<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/ace.js"></script>
+<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/ext-language_tools.js"></script>
 	`;
   $("#content").html(content);
   $.get(path, function (data) {
