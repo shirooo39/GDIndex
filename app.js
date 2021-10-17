@@ -5487,30 +5487,30 @@ if (UI.dark_mode) {
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/mdui_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui/mdui_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/mdui_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui/mdui_v2.min.css">'
   );
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/nexmoe_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe/nexmoe_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/nexmoe_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe/nexmoe_v2.min.css">'
   );
 }
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/mdui.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/js/mdui.min.js"></script>'
 );
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/flv.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/js/flv.min.js"></script>'
 );
 document.write(
-  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/DPlayer.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/js/DPlayer.min.js"></script>'
 );
 document.write(
   '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>'
