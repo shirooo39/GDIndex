@@ -26,7 +26,7 @@ const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceacc
 
 //------------------------------ Main Configurations ------------------------------//
 var authConfig = {
-  siteName: "Shiro39", // Site name
+  siteName: "GoIndex Achrou", // Site name
   version: "1.1.2", // Script version
   theme: "acrou",
 
