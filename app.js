@@ -5487,30 +5487,30 @@ if (UI.dark_mode) {
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/mdui_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/mdui_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/mdui_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/mdui_v2.min.css">'
   );
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/nexmoe_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/nexmoe_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/css/nexmoe_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//css/nexmoe_v2.min.css">'
   );
 }
 document.write(
-  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/mdui.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/mdui.min.js"></script>'
 );
 document.write(
-  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/flv.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/flv.min.js"></script>'
 );
 document.write(
-  '<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/DPlayer.min.js"></script>'
+  '<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe//js/DPlayer.min.js"></script>'
 );
 document.write(
   '<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>'
@@ -6184,8 +6184,8 @@ function file_code(path) {
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
-<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/ace.js"></script>
-<script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/ext-language_tools.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/js/ace.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/js/ext-language_tools.js"></script>
 	`;
   $("#content").html(content);
   $.get(path, function (data) {

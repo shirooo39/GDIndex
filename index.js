@@ -1,6 +1,6 @@
 const authConfig = {
   "siteName": "GoIndex", // Site name
-  "siteIcon": "https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/images/icons/favicon-x.png", // Alternative: fevicon-x-light.png
+  "siteIcon": "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/images/icons/favicon-x.png", // Alternative: fevicon-x-light.png
   "version": "1.3.6", // Versin control. DO NOT MODIFY MANUALLY!
 
   /** 
@@ -198,7 +198,7 @@ function html(current_drive_order = 0, model = {}) {
     window.current_drive_order = ${current_drive_order};
     window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
   </script>
-  <script src="https://raw.githubusercontent.com/shirooo39/GDIndex/shiromoe/dist/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/app.js"></script>
 </head>
 <body>
 </body>
