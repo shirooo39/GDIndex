@@ -5487,20 +5487,20 @@ if (UI.dark_mode) {
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui/mdui_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/mdui_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/mdui/mdui_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/mdui_v2.min.css">'
   );
 }
 if (UI.dark_mode) {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe/nexmoe_v2_dark.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/nexmoe_v2_dark.min.css">'
   );
 } else {
   document.write(
-    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/css/nexmoe/nexmoe_v2.min.css">'
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/css/nexmoe_v2.min.css">'
   );
 }
 document.write(
@@ -5557,7 +5557,7 @@ function init() {
     html += `
     <div style="margin-bottom: 20px" class="mdui-center mdui-text-center">
       <a href="https://github.com/shirooo39/GDIndex/tree/shiromoe" target="_blank">
-        <img src="https://img.shields.io/static/v1?label=cheems&amp;message=goindex-extended&amp;color=1E89F2&amp;labelColor=374455&amp;logo=github" alt="cheems - goindex-extended">
+        <img src="https://img.shields.io/static/v1?label=cheems&amp;message=goindex-extended&amp;color=1E89F2&amp;labelColor=374455&amp;logo=github" alt="GoIndex">
       </a>
     </div>
     </div>

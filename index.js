@@ -1,6 +1,6 @@
 const authConfig = {
   "siteName": "GoIndex", // Site name
-  "siteIcon": "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/images/icons/favicon-x.png", // Alternative: fevicon-x-light.png
+  "siteIcon": "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/images/favicon-x.png", // Alternative: fevicon-x-light.png
   "version": "1.3.6", // Versin control. DO NOT MODIFY MANUALLY!
 
   /** 
@@ -13,8 +13,8 @@ const authConfig = {
   "client_id": "", 
   "client_secret": "",
   "refresh_token": "",
-
-  /**
+ 
+   /**
     * Set up multiple Drives to be displayed; add multiples by format
     * [id]: It can be team folder id, subfolder id, or "root" (representing the root directory of personal disk);
     * [name]: the displayed name

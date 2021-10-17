@@ -102,7 +102,7 @@
     float: left;
     width: 30px;
     height: 30px;
-    background: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/images/icons/icon_menu.png);
+    background: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/images/icon_menu.png);
     background-size:100% 100%;
     transition: .6s;
     cursor: pointer;
@@ -110,7 +110,7 @@
 
 /* 图标动画icon */
 .nav_icon:hover{
-    background: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/dist/images/icons/icon_close.png);
+    background: url(https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/images/icon_close.png);
     background-size:100% 100%;
     transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
