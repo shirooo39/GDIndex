@@ -1,3 +1,35 @@
+/****************************************************************************************************
+ * Added support for multiple service accounts.
+ * Service account will be chosen randomly.
+****************************************************************************************************/
+const serviceaccounts = [
+  /****************************************************************************************************
+   * Example
+  ****************************************************************************************************/
+  // {
+  //   "type": "",
+  //   "project_id": "",
+  //   "private_key_id": "",
+  //   "private_key": "",
+  //   "client_email": "",
+  //   "client_id": "",
+  //   "auth_uri": "",
+  //   "token_uri": "",
+  //   "auth_provider_x509_cert_url": "",
+  //   "client_x509_cert_url": ""
+  // }
+
+  /****************************************************************************************************
+   * Your service account credentials goes below
+  ****************************************************************************************************/
+
+];
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // Do NOT modify this!
+/****************************************************************************************************/
+
+/****************************************************************************************************
+ * Configurations
+****************************************************************************************************/
 const authConfig = {
   "siteName": "GoIndex", // Site name
   "siteIcon": "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@shiromoe/images/favicon-x.png", // Alternative: fevicon-x-light.png
@@ -14,7 +46,12 @@ const authConfig = {
   "client_secret": "",
   "refresh_token": "",
  
-   /**
+  "service_account": false, // Set this to "true" if you want to use service account.
+	"service_account_json": randomserviceaccount, // Do NOT modify this line!
+	// Make sure you already have your SAs added into the target drive first! (be it as a Google Group or one-by-one)
+	// If you enable the service_account, you can leave the refresh_token blank.
+
+  /**
     * Set up multiple Drives to be displayed; add multiples by format
     * [id]: It can be team folder id, subfolder id, or "root" (representing the root directory of personal disk);
     * [name]: the displayed name
@@ -84,13 +121,14 @@ const authConfig = {
   **/
   "enable_password_file_verify": false
 };
+/****************************************************************************************************/
 
-/****************************************************
+/****************************************************************************************************
  * Web UI Configurations
-****************************************************/
+****************************************************************************************************/
 const uiConfig = {
   "theme": "material", // DO NOT CHANGE THIS!
-  "dark_mode": false, // Enable or disable dark mode by setting the value "true" or "false".
+  "dark_mode": true, // Enable or disable dark mode by setting the value "true" or "false".
   "title_include_drive_name": false, // Set this to true if you need to add drive name to the page title which will be displayed in browser tab name area (ex: Goindex Extented - Disk 01)
   "title_include_path": "", // full-path | current-directory | or leave it empty
                             // set title_include_path to "full-path" if you want to add full path of the current directory to title (ex: Goindex Extented - /Multimedia/images/) or (ex: Goindex Extented - Disk 01 - /Multimedia/images)
@@ -149,6 +187,8 @@ const workspaceExportMimeTypes = {
   "png": "image/png",
   "svg": "image/svg+xml"
 };
+/****************************************************************************************************/
+
 
 /**
  * global functions
@@ -204,6 +244,67 @@ function html(current_drive_order = 0, model = {}) {
 </body>
 </html>
 `;
+};
+
+const JSONWebToken = {
+  header: {
+    alg: 'RS256',
+    typ: 'JWT'
+  },
+  importKey: async function(pemKey) {
+    var pemDER = this.textUtils.base64ToArrayBuffer(pemKey.split('\n').map(s => s.trim()).filter(l => l.length && !l.startsWith('---')).join(''));
+    return crypto.subtle.importKey('pkcs8', pemDER, {
+      name: 'RSASSA-PKCS1-v1_5',
+      hash: 'SHA-256'
+    }, false, ['sign']);
+  },
+  createSignature: async function(text, key) {
+    const textBuffer = this.textUtils.stringToArrayBuffer(text);
+    return crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, textBuffer)
+  },
+  generateGCPToken: async function(serviceAccount) {
+    const iat = parseInt(Date.now() / 1000);
+    var payload = {
+      "iss": serviceAccount.client_email,
+      "scope": "https://www.googleapis.com/auth/drive",
+      "aud": "https://oauth2.googleapis.com/token",
+      "exp": iat + 3600,
+      "iat": iat
+    };
+    const encPayload = btoa(JSON.stringify(payload));
+    const encHeader = btoa(JSON.stringify(this.header));
+    var key = await this.importKey(serviceAccount.private_key);
+    var signed = await this.createSignature(encHeader + "." + encPayload, key);
+    return encHeader + "." + encPayload + "." + this.textUtils.arrayBufferToBase64(signed).replace(/\//g, '_').replace(/\+/g, '-');
+  },
+  textUtils: {
+    base64ToArrayBuffer: function(base64) {
+      var binary_string = atob(base64);
+      var len = binary_string.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    stringToArrayBuffer: function(str) {
+      var len = str.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = str.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    arrayBufferToBase64: function(buffer) {
+      let binary = '';
+      let bytes = new Uint8Array(buffer);
+      let len = bytes.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+    }
+  }
 };
 
 addEventListener('fetch', event => {
@@ -1041,11 +1142,20 @@ class googleDrive {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    const post_data = {
-      'client_id': this.authConfig.client_id,
-      'client_secret': this.authConfig.client_secret,
-      'refresh_token': this.authConfig.refresh_token,
-      'grant_type': 'refresh_token'
+    var post_data;
+    if (this.authConfig.service_account && typeof this.authConfig.service_account_json != "undefined") {
+      const jwttoken = await JSONWebToken.generateGCPToken(this.authConfig.service_account_json);
+      post_data = {
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwttoken,
+      };
+    } else {
+      post_data = {
+        client_id: this.authConfig.client_id,
+        client_secret: this.authConfig.client_secret,
+        refresh_token: this.authConfig.refresh_token,
+        grant_type: "refresh_token",
+      };
     }
 
     let requestOption = {
