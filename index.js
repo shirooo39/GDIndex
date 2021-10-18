@@ -1,22 +1,66 @@
-//----------------------------------------------------------------------------------------------------------------------------------
-//
-// Main Configurations
-//
-const authConfig = {
-  "siteName": "GoIndex", // Site name. Feel free to fill this with whatever you want.
-  //"version": "_4.28", // Do NOT modify! Might cause some issue!
+/**********************************************************************
+ * GoIndex --- yanzai
+**********************************************************************/
 
-  /**************************************************
-  "client_id": "202264815644.apps.googleusercontent.com",
-  "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
-  **************************************************/
-  // The rclone documentation recommended to use your own client_id.
+/**********************************************************************
+ * Service accounts
+ * 
+ * Added support for multiple and randomized service accounts.
+ * The service account will be chosen randomly on each site visit.
+**********************************************************************/
+const serviceaccounts = [
+  /**********************************************************************
+   * Example
+  **********************************************************************/
+  // {
+  //   "type": "",
+  //   "project_id": "",
+  //   "private_key_id": "",
+  //   "private_key": "",
+  //   "client_email": "",
+  //   "client_id": "",
+  //   "auth_uri": "",
+  //   "token_uri": "",
+  //   "auth_provider_x509_cert_url": "",
+  //   "client_x509_cert_url": ""
+  // }
+
+  /**********************************************************************
+   * Your service account credentials goes below
+  **********************************************************************/
+
+];
+const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // DO NOT MODIFY THIS LINE!
+/*********************************************************************/
+
+/**********************************************************************
+ * GoIndex Configurations
+**********************************************************************/
+const authConfig = {
+  "siteName": "GoIndex", // Site name
+  "version": "_4.28", // Version control. Do NOT modify this!
+
+  /**********************************************************************
+   * It's highly recommended to use your OWN client_id!
+   * 
+   * "client_id": "202264815644.apps.googleusercontent.com",
+   * "client_secret": "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
+  **********************************************************************/
   "client_id": "",
   "client_secret": "",
-  "refresh_token": "", // You can get the refresh_token from your rclone.conf file (assuming you already have rclone set up and working).
-  /**************************************************
-   * 
-   * !! Machine Translated !!
+
+  "refresh_token": "",
+
+  /**********************************************************************
+   * Make sure you already have your SAs added into the target drive first!
+   * If you enable the service_account, you can leave the refresh_token blank.
+   * Be sure to have all your service accounts added into the same drive.
+  **********************************************************************/
+  "service_account": false, // Set this to "true" if you want to use service account.
+  "service_account_json": randomserviceaccount, // Do NOT modify this one!
+
+  /**********************************************************************
+   * This is machine translation!
    * 
    * Set multiple cloud drives to be displayed; add multiple by format
    * [id]: can be team drive id, subfolder id, or "root" (for personal drive root).
@@ -26,100 +70,82 @@ const authConfig = {
    * [protect_file_link]: whether Basic Auth is used to protect file links, default value (when not set) is false, i.e. no file links are protected (for direct link download/external playback, etc.)
    * Basic Auth protects all folders/subfolder paths under the disk by default.
    * [Note] File links are not protected by default, so that it is convenient for direct link downloading/external playback;
-   * If you want to protect file link, you need to set protect_file_link to true, then you need to replace the host with user:pass@host if you want to do external playback.
+   * If you want to protect file link, you need to set protect_file_link to true, then you need to replace the host with user:pass_host if you want to do external playback.
    * If you don't need Basic Auth, just keep user and pass empty at the same time. (Directly without setting can also be)
-   * Note: The search function will not be supported for disks whose id is set to subfolder id (does not affect other disks).
-   * 
-   **************************************************/
-
+   * [Note] The search function will not be supported for the disk whose id is set to subfolder id (does not affect other disks).
+  **********************************************************************/
   "roots": [
-    /**************************************************
-    * Support multiple drives / home folders (root_id).
-    * 
-    * You can also give value to the "pass" variable only and not the "user" variable.
-    * or you can just give them both values.
-    **************************************************/
     {
-      id: "id_1",
-      name: "Name 1",
-      user: '',
-      pass: "",
-      protect_file_link: false
-    }
-    /**************************************************
-    {
-      id: "id_2",
-      name: "Name 2",
-      user: '',
-      pass: "",
-      protect_file_link: false
+      id: "root",
+      name: "Drive 1"
     },
     {
-      id: "id_3",
-      name: "Name 3",
-      user: '',
-      pass: "",
+      id: "drive_id",
+      name: "Drive 2",
+      user: "userame",
+      pass: "password",
+      protect_file_link: true
+    },
+    {
+      // It's possible to just fill in the username only, passowrd only or both.
+      id: "folder_id",
+      name: "Drive 3",
+      user: "",
+      pass: "password",
       protect_file_link: false
     }
-    **************************************************/
   ],
 
-  /**************************************************
+  /**********************************************************************
+   * This is machine translation!
    * 
-   * !! Machine Translated !!
-   * 
-   * The number of pages to be displayed on each page of the file list page. The recommended value is between 100 and 1000].
+   * The number of pages to be displayed on each page of the file list page. Recommended value is between 100 and 1000].
    * If the value set is greater than 1000, it will cause an error when requesting the drive api.
-   * If the value set is too small, it will cause the file list page scrollbar incremental loading (paging loading) to fail.
+   * If the value is set too small, it will cause the file list page scrollbar incremental loading (paging loading) to fail.
    * Another function of this value is that if the number of files in the directory is larger than this setting (i.e., if multiple pages need to be displayed), the first listing of directory results will be cached.
-   **************************************************/
+  **********************************************************************/
   "files_list_page_size": 500,
 
-  /**************************************************
-   * 
-   * !! Machine Translated !!
+  /**********************************************************************
+   * This is machine translation!
    * 
    * The number of search results pages to display per page. The recommended value is between 50 and 1000].
    * If the value set is greater than 1000, it will cause an error when requesting the drive api.
    * If the value set is too small, it will cause the search result page scroll bar incremental loading (paging loading) to fail.
-   * the size of this value affects the response speed of the search operation.
-   **************************************************/
+   * The size of this value affects the response speed of the search operation.
+  **********************************************************************/
   "search_result_list_page_size": 50,
 
-  // 确认有 cors 用途的可以开启
+  // Enable (true) or disable (false) cors; Cross-origin Resource Sharing
   "enable_cors_file_down": false,
 
-  /**************************************************
-   * 
-   * !! Machine Translated !!
+  /**********************************************************************
+   * This is machine translation!
    * 
    * The basic auth above already includes the global protection of the disk. So by default, the password in the .password file is not authenticated;
    * If you still need to authenticate some directories separately with .password files on top of global authentication, set this option to true;
    * Note: If .password file password authentication is enabled, each time a directory is listed, there will be additional overhead to check whether the .password file exists in the directory.
-   **************************************************/
+  **********************************************************************/
   "enable_password_file_verify": false
 };
+/*********************************************************************/
 
-/**************************************************
- * 
+/**********************************************************************
  * Web UI Configurations
- * 
- **************************************************/
+**********************************************************************/
 const uiConfig = {
-  // Only support material theme.
-  "theme": "material", // Do NOT set it to classic!
-  "dark_mode": false, // Set this to "true" to enable dark mode.
-  "main_color": "blue-grey",
-  "accent_color": "blue",
-  /*
-  "main_color": "light-green",
-  "accent_color": "green",
-  */
+  // Currently only support the Material Design theme.
+  "theme": "material", // DO NOT CHANGE THE THEME TO "CLASSIC"!
+  "dark_mode": false, // Set this to "true" or "false" to enable or disable the dark mode.
+  "main_color": "indigo",
+  "accent_color": "indigo",
   "fluid_navigation_bar": true,
 };
-//
-//----------------------------------------------------------------------------------------------------------------------------------
+/*********************************************************************/
 
+/**********************************************************************
+ * ! DO NOT MODIFY ANYTHING PASS THIS POINT !
+**********************************************************************/
 /**
  * global functions
  */
@@ -170,13 +196,74 @@ function html(current_drive_order = 0, model = {}) {
     window.current_drive_order = ${current_drive_order};
     window.UI = JSON.parse('${JSON.stringify(uiConfig)}');
   </script>
-  <script src="https://cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/shirooo39/GDIndex@yanzai/themes/${uiConfig.theme}/app.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/gh/jquery/jquery@3.6.0/dist/jquery.min.js,gh/shirooo39/GDIndex@yanzai/themes/${uiConfig.theme}/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdui@1.0.2/dist/js/mdui.min.js"></script>
 </head>
 <body>
 </body>
 </html>
 `;
+};
+
+const JSONWebToken = {
+  header: {
+    alg: 'RS256',
+    typ: 'JWT'
+  },
+  importKey: async function(pemKey) {
+    var pemDER = this.textUtils.base64ToArrayBuffer(pemKey.split('\n').map(s => s.trim()).filter(l => l.length && !l.startsWith('---')).join(''));
+    return crypto.subtle.importKey('pkcs8', pemDER, {
+      name: 'RSASSA-PKCS1-v1_5',
+      hash: 'SHA-256'
+    }, false, ['sign']);
+  },
+  createSignature: async function(text, key) {
+    const textBuffer = this.textUtils.stringToArrayBuffer(text);
+    return crypto.subtle.sign('RSASSA-PKCS1-v1_5', key, textBuffer)
+  },
+  generateGCPToken: async function(serviceAccount) {
+    const iat = parseInt(Date.now() / 1000);
+    var payload = {
+      "iss": serviceAccount.client_email,
+      "scope": "https://www.googleapis.com/auth/drive",
+      "aud": "https://oauth2.googleapis.com/token",
+      "exp": iat + 3600,
+      "iat": iat
+    };
+    const encPayload = btoa(JSON.stringify(payload));
+    const encHeader = btoa(JSON.stringify(this.header));
+    var key = await this.importKey(serviceAccount.private_key);
+    var signed = await this.createSignature(encHeader + "." + encPayload, key);
+    return encHeader + "." + encPayload + "." + this.textUtils.arrayBufferToBase64(signed).replace(/\//g, '_').replace(/\+/g, '-');
+  },
+  textUtils: {
+    base64ToArrayBuffer: function(base64) {
+      var binary_string = atob(base64);
+      var len = binary_string.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = binary_string.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    stringToArrayBuffer: function(str) {
+      var len = str.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = str.charCodeAt(i);
+      }
+      return bytes.buffer;
+    },
+    arrayBufferToBase64: function(buffer) {
+      let binary = '';
+      let bytes = new Uint8Array(buffer);
+      let len = bytes.byteLength;
+      for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+    }
+  }
 };
 
 addEventListener('fetch', event => {
@@ -828,11 +915,20 @@ class googleDrive {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded'
     };
-    const post_data = {
-      'client_id': this.authConfig.client_id,
-      'client_secret': this.authConfig.client_secret,
-      'refresh_token': this.authConfig.refresh_token,
-      'grant_type': 'refresh_token'
+    var post_data;
+    if (this.authConfig.service_account && typeof this.authConfig.service_account_json != "undefined") {
+      const jwttoken = await JSONWebToken.generateGCPToken(this.authConfig.service_account_json);
+      post_data = {
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion: jwttoken,
+      };
+    } else {
+      post_data = {
+        client_id: this.authConfig.client_id,
+        client_secret: this.authConfig.client_secret,
+        refresh_token: this.authConfig.refresh_token,
+        grant_type: "refresh_token",
+      };
     }
 
     let requestOption = {

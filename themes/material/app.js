@@ -1,7 +1,7 @@
 // 在head 中 加载 必要静态
-document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
+document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdui@1.0.2/dist/css/mdui.min.css">');
 // markdown支持
-document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
+document.write('<script src="https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
 // add custome theme and darkmode
 if (UI.dark_mode) {
@@ -200,15 +200,15 @@ function list(path) {
 	  <ul class="mdui-list"> 
 	   <li class="mdui-list-item th"> 
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
-	     File
+	     文件
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-	     Date modified
+	     修改时间
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
-	     Size
+	     大小
 	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
 	    </div> 
 	    </li> 
@@ -434,15 +434,15 @@ function render_search_result_list() {
 	  <ul class="mdui-list"> 
 	   <li class="mdui-list-item th"> 
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
-	     File
+	     文件
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-	     Date modified
+	     修改时间
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
-	     Size
+	     大小
 	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
 	    </div> 
 	    </li> 
@@ -600,7 +600,7 @@ function onSearchResultItemClick(a_ele) {
   var cur = window.current_drive_order;
   var dialog = mdui.dialog({
     title: '',
-    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">Loading path...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
+    content: '<div class="mdui-text-center mdui-typo-title mdui-m-b-1">正在获取目标路径...</div><div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     // content: '<div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>',
     history: false,
     modal: true,
@@ -621,28 +621,28 @@ function onSearchResultItemClick(a_ele) {
         closeOnEsc: true,
         buttons: [
           {
-            text: 'Open', onClick: function () {
+            text: '打开', onClick: function () {
               window.location.href = href
             }
           }, {
-            text: 'Open in a new tab', onClick: function () {
+            text: '新标签中打开', onClick: function () {
               window.open(href)
             }
           }
-          , {text: 'Cancel'}
+          , {text: '取消'}
         ]
       });
       return;
     }
     dialog.close();
     dialog = mdui.dialog({
-      title: '<i class="mdui-icon material-icons">&#xe811;</i>Unable to the path!',
-      content: 'o(╯□╰)o Unable to locate the file or folder! Might not exist on the drive!',
+      title: '<i class="mdui-icon material-icons">&#xe811;</i>获取目标路径失败',
+      content: 'o(╯□╰)o 可能是因为该盘中并不存在此项！也可能因为没有把【与我共享】的文件添加到个人云端硬盘中！',
       history: false,
       modal: true,
       closeOnEsc: true,
       buttons: [
-        {text: 'OK'}
+        {text: 'WTF ???'}
       ]
     });
   })
@@ -994,7 +994,7 @@ String.prototype.trim = function (char) {
 // README.md HEAD.md 支持
 function markdown(el, data) {
   if (window.md == undefined) {
-    //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
+    //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@12.2.0/dist/markdown-it.min.js',function(){
     window.md = window.markdownit();
     markdown(el, data);
     //});
