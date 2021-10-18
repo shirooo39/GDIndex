@@ -1,47 +1,68 @@
-//------------------------------ Service Accounts COnfiguration ------------------------------//
-// Added support for multiple service accounts.
-// Random service account will be selected by each time the site is visited.
-//
+/**********************************************************************
+ * GoIndex --- achrou
+**********************************************************************/
+
+/**********************************************************************
+ * Service accounts
+ * 
+ * Added support for multiple and randomized service accounts.
+ * The service account will be chosen randomly on each site visit.
+**********************************************************************/
 const serviceaccounts = [
-  // Your service account(s) goes here.
-  // Multiple service accounts are also supported.
-  //
-  /*****
-  {
-    "type": "service_account",
-    "project_id": "BLANK",
-    "private_key_id": "BLANK",
-    "private_key": "BLANK",
-    "client_email": "BLANK",
-    "client_id": "BLANK",
-    "auth_uri": "BLANK",
-    "token_uri": "BLANK",
-    "auth_provider_x509_cert_url": "BLANK",
-    "client_x509_cert_url": "BLANK"
-  }
-  *****/
+  /**********************************************************************
+   * Example
+  **********************************************************************/
+  // {
+  //   "type": "",
+  //   "project_id": "",
+  //   "private_key_id": "",
+  //   "private_key": "",
+  //   "client_email": "",
+  //   "client_id": "",
+  //   "auth_uri": "",
+  //   "token_uri": "",
+  //   "auth_provider_x509_cert_url": "",
+  //   "client_x509_cert_url": ""
+  // }
+
+  /**********************************************************************
+   * Your service account credentials goes below
+  **********************************************************************/
+
 ];
 const randomserviceaccount = serviceaccounts[Math.floor(Math.random()*serviceaccounts.length)]; // Do NOT modify this!
-//------------------------------ END ------------------------------//
+/*********************************************************************/
 
-//------------------------------ Main Configurations ------------------------------//
+/**********************************************************************
+ * GoIndex Configurations
+**********************************************************************/
 var authConfig = {
-  siteName: "GoIndex Achrou", // Site name
-  version: "1.1.2", // Script version
-  theme: "acrou",
+  siteName: "GoIndex", // Site name
+  version: "1.1.2", // Version control. DO NOT MODIFY!
+  theme: "acrou", // DO NOT MODIFY!
 
-  // It's highly recommended to use your OWN client_id, instead of using rclone's client_id.
-  client_id: "202264815644.apps.googleusercontent.com",
-  client_secret: "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
-  refresh_token: "", // rclone refresh token
+  /**********************************************************************
+   * It's highly recommended to use your OWN client_id!
+   * 
+   * client_id: "202264815644.apps.googleusercontent.com",
+   * client_secret: "X4Z3ca8xfWDb1Voo-F9a7ZxJ",
+  **********************************************************************/
+  client_id: "",
+  client_secret: "",
 
-  // Enable or disable service accounts
-  "service_account": true, // Set this to "true" if you want to use Service Account.
-	"service_account_json": randomserviceaccount, // Do NOT modify this one!
-	// Make sure you already have your SAs added into the target drive first! (be it as a Google Group or one-by-one)
-	// If you enable the service_account, you can leave the refresh_token blank.
-  
-  /**
+  refresh_token: "",
+
+  /**********************************************************************
+   * Make sure you already have your SAs added into the target drive first!
+   * If you enable the service_account, you can leave the refresh_token blank.
+   * Be sure to have all your service accounts added into the same drive.
+  **********************************************************************/
+  "service_account": false, // Set this to "true" if you want to use service account.
+  "service_account_json": randomserviceaccount, // Do NOT modify this one!
+
+  /**********************************************************************
+   * This is machine translation!
+   * 
    * Set multiple cloud drives to be displayed; add multiple by format
    * [id]: can be team drive id, subfolder id, or "root" (for personal drive root).
    * [name]: Name to be displayed
@@ -50,69 +71,90 @@ var authConfig = {
    * [protect_file_link]: whether Basic Auth is used to protect file links, default value (when not set) is false, i.e. no file links are protected (for direct link download/external playback, etc.)
    * Basic Auth protects all folders/subfolder paths under the disk by default.
    * [Note] File links are not protected by default, so that it is convenient for direct link downloading/external playback;
-   * If you want to protect file link, you need to set protect_file_link to true, then you need to replace the host with user:pass@host if you want to do external playback.
+   * If you want to protect file link, you need to set protect_file_link to true, then you need to replace the host with user:pass_host if you want to do external playback.
    * If you don't need Basic Auth, just keep user and pass empty at the same time. (Directly without setting can also be)
    * [Note] The search function will not be supported for the disk whose id is set to subfolder id (does not affect other disks).
-   */
+  **********************************************************************/
   roots: [
     {
       id: "root",
-      name: "Drive",
+      name: "Drive 1",
       user: "",
       pass: "",
-      protect_file_link: false
+      protect_file_link: false,
+    },
+    {
+      id: "root",
+      name: "Drive 2",
+      user: "",
+      pass: "",
+      protect_file_link: false,
+    },
+    {
+      id: "",
+      name: "Drive 3",
+      user: "",
+      pass: "",
+      protect_file_link: false,
     }
-    // {
-    //   id: "",
-    //   name: "",
-    //   user: "",
-    //   pass: "",
-    //   protect_file_link: false
-    // },
-    // {
-    //   id: "",
-    //   name: "",
-    //   user: "",
-    //   pass: "",
-    //   protect_file_link: false
-    // }
   ],
+
   default_gd: 0,
-  /**
+
+  /**********************************************************************
+   * This is machine translation!
+   * 
    * The number of pages to be displayed on each page of the file list page. Recommended value is between 100 and 1000].
    * If the value set is greater than 1000, it will cause an error when requesting the drive api.
    * If the value is set too small, it will cause the file list page scrollbar incremental loading (paging loading) to fail.
    * Another function of this value is that if the number of files in the directory is larger than this setting (i.e., if multiple pages need to be displayed), the first listing of directory results will be cached.
-   */
+  **********************************************************************/
   files_list_page_size: 50,
-  
-  /**
-   * The number of search results pages to be displayed per page. Recommended value is between 50 and 1000].
+
+  /**********************************************************************
+   * This is machine translation!
+   * 
+   * The number of search results pages to display per page. The recommended value is between 50 and 1000].
    * If the value set is greater than 1000, it will cause an error when requesting the drive api.
    * If the value set is too small, it will cause the search result page scroll bar incremental loading (paging loading) to fail.
    * The size of this value affects the response speed of the search operation.
-   */
+  **********************************************************************/
   search_result_list_page_size: 50,
 
-  // Enable or disable cors
+  // Enable (true) or disable (false) cors; Cross-origin Resource Sharing
   enable_cors_file_down: false,
-  
-  /**
-   * The basic auth above already includes the global protection in the disk. So by default, the password in the .password file will not be authenticated;
-   * If you still need to authenticate passwords in .password files for some directories on top of global authentication, set this option to true;
-   * Note: If .password file password authentication is enabled, each time a directory is listed, there will be additional overhead for querying whether the .password file exists in the directory.
-   */
+
+  /**********************************************************************
+   * This is machine translation!
+   * 
+   * The basic auth above already includes the global protection of the disk. So by default, the password in the .password file is not authenticated;
+   * If you still need to authenticate some directories separately with .password files on top of global authentication, set this option to true;
+   * Note: If .password file password authentication is enabled, each time a directory is listed, there will be additional overhead to check whether the .password file exists in the directory.
+  **********************************************************************/
   enable_password_file_verify: false,
 };
+/*********************************************************************/
 
+/**********************************************************************
+ * Web UI Configurations
+**********************************************************************/
 var themeOptions = {
-  cdn: "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@achrou", // Base url
-  version: "2.0.8", // This entry is meaningless in my moddified version
-  languages: "en", // Set the default language: en/zh-chs/zh-cht
+  cdn: "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@achrou",
+  version: "2.0.8",
+  languages: "en", // Set the default language: en / zh-chs / zh-cht
   render: {
-    head_md: false, // Render HEAD.md or not
-    readme_md: false, // Render README.md or not
-    desc: false, // Render file/folder description or not
+    /**
+     * Enable or disable rendering the HEAD.md file
+     */
+    head_md: false,
+    /**
+     * Enable or disable rendering the README.md file
+     */
+    readme_md: false,
+    /**
+     * Show or hide file description
+     */
+    desc: false,
   },
   /**
    * 视频播放器选项
@@ -132,8 +174,11 @@ var themeOptions = {
    */
   audio: {},
 };
-//------------------------------ END ------------------------------//
+/*********************************************************************/
 
+/**********************************************************************
+ * ! DO NOT MODIFY ANYTHING PASS THIS POINT !
+**********************************************************************/
 /**
  * global functions
  */
