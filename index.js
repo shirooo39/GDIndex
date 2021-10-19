@@ -140,7 +140,7 @@ var authConfig = {
 **********************************************************************/
 var themeOptions = {
   cdn: "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@achrou",
-  mode: "light",
+  mode: "dark", // theme: dark / light (dark mode is enabled by default)
   version: "2.0.8",
   languages: "en", // Set the default language: en / zh-chs / zh-cht
   render: {
