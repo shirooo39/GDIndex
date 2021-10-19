@@ -140,6 +140,7 @@ var authConfig = {
 **********************************************************************/
 var themeOptions = {
   cdn: "https://cdn.jsdelivr.net/gh/shirooo39/GDIndex@achrou",
+  mode: "light",
   version: "2.0.8",
   languages: "en", // Set the default language: en / zh-chs / zh-cht
   render: {
@@ -166,7 +167,7 @@ var themeOptions = {
      * Player api(Use default player if not specified)
      */
     api: "",
-    autoplay: true,
+    autoplay: false,
   },
   /**
    * 音频播放器选项
@@ -224,7 +225,7 @@ function html(current_drive_order = 0, model = {}) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
   <title>${authConfig.siteName}</title>
   <style>
-    @import url(${themeOptions.cdn}/dist/style.css);
+    @import url(${themeOptions.cdn}/dist/${themeOptions.mode}/style.css);
   </style>
   <script>
     window.gdconfig = JSON.parse('${JSON.stringify({
@@ -241,7 +242,7 @@ function html(current_drive_order = 0, model = {}) {
 </head>
 <body>
     <div id="app"></div>
-    <script src="${themeOptions.cdn}/dist/app.min.js"></script>
+    <script src="${themeOptions.cdn}/dist/${themeOptions.mode}/app.min.js"></script>
 </body>
 </html>
 `;
